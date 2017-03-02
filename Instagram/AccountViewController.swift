@@ -1,19 +1,21 @@
 //
-//  TimelineViewController.swift
+//  AccountViewController.swift
 //  Instagram
 //
-//  Created by Julian Test on 3/1/17.
+//  Created by Julian Test on 3/2/17.
 //  Copyright © 2017 Julian Bossiere. All rights reserved.
 //
 
 import UIKit
 import Parse
 
-class TimelineViewController: UIViewController {
+class AccountViewController: UIViewController {
 
+    @IBOutlet weak var logoutButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        logoutButton.layer.cornerRadius = 5
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,13 +23,12 @@ class TimelineViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-//    @IBAction func onLogout(_ sender: Any) {
-//        PFUser.logOutInBackground { (error: Error?) in
-//            // PFUser.currentUser() will now be nil
-//            self.performSegue(withIdentifier: "unwindToLogin", sender: nil)
-//        }
-//    }
-    
+    @IBAction func onLogout(_ sender: Any) {
+        PFUser.logOutInBackground { (error: Error?) in
+            // PFUser.currentUser() will now be nil
+            self.performSegue(withIdentifier: "unwindToLogin", sender: nil)
+        }
+    }
 
     /*
     // MARK: - Navigation

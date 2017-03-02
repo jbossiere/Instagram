@@ -35,6 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
             self.window?.rootViewController = vc
         }
+        
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        
+//        let timelineNavigationController = storyboard.instantiateViewController(withIdentifier: "InstaNavigationController") as! UINavigationController
+//        let timelineViewController = timelineNavigationController.topViewController as! TimelineViewController
+        
+        
         return true
     }
 

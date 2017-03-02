@@ -118,7 +118,7 @@
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
         </scene>
-        <!--Timeline View Controller-->
+        <!--Home-->
         <scene sceneID="AdZ-rQ-rcE">
             <objects>
                 <viewController id="ZpM-Q8-JHi" customClass="TimelineViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
@@ -131,6 +131,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Home" image="home-icon" id="ld9-lq-GHE"/>
                     <navigationItem key="navigationItem" id="R7Z-pT-cZP">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="rZC-QY-Udk">
                             <connections>
@@ -138,14 +139,109 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="aIF-nN-OAB" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="8fr-A0-1f7"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7V-DT-X0z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="aIF-nN-OAB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1815.2" y="123.68815592203899"/>
+            <point key="canvasLocation" x="2754.4000000000001" y="123.68815592203899"/>
+        </scene>
+        <!--Capture-->
+        <scene sceneID="BZE-GP-ecO">
+            <objects>
+                <viewController id="jdk-tS-50f" customClass="CaptureViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LHU-jZ-cMb"/>
+                        <viewControllerLayoutGuide type="bottom" id="EZT-Ca-HED"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dvY-0d-9DN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vls-eq-7TL">
+                                <rect key="frame" x="32" y="313" width="139" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.65098039215686276" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
+                                <state key="normal" title="Choose Photo">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="choosePhoto:" destination="jdk-tS-50f" eventType="touchUpInside" id="Vec-pn-4Od"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDj-Jt-ZYh">
+                                <rect key="frame" x="204" y="313" width="139" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.65098039215686276" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
+                                <state key="normal" title="Take Photo">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="takePhoto:" destination="jdk-tS-50f" eventType="touchUpInside" id="tSC-Yb-t3f"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Capture" image="capture-icon" selectedImage="capture-icon" id="vxS-aE-gbK">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
+                    <connections>
+                        <outlet property="choosePhotoButton" destination="vls-eq-7TL" id="E5E-QK-le7"/>
+                        <outlet property="takePhotoButton" destination="nDj-Jt-ZYh" id="IIc-T8-5sL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oax-bx-Dw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2740" y="860"/>
+        </scene>
+        <!--Account-->
+        <scene sceneID="ORk-zw-0GT">
+            <objects>
+                <viewController id="1nU-P8-OjQ" customClass="AccountViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hwu-oE-Aq2"/>
+                        <viewControllerLayoutGuide type="bottom" id="aJo-JB-RnO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mfk-Ln-8xh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aW-qC-weE">
+                                <rect key="frame" x="142" y="283" width="90" height="43"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="bgr-1U-VFn"/>
+                                    <constraint firstAttribute="height" constant="43" id="od3-nD-nuh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onLogout:" destination="1nU-P8-OjQ" eventType="touchUpInside" id="iQD-B9-Hz1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7aW-qC-weE" firstAttribute="top" secondItem="hwu-oE-Aq2" secondAttribute="bottom" constant="219" id="BBD-FN-aLB"/>
+                            <constraint firstItem="7aW-qC-weE" firstAttribute="centerX" secondItem="mfk-Ln-8xh" secondAttribute="centerX" id="t3j-QW-KBm"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Account" image="account-icon" selectedImage="account-icon" id="VRk-6J-wOe"/>
+                    <connections>
+                        <outlet property="logoutButton" destination="7aW-qC-weE" id="nMr-8I-ghC"/>
+                        <segue destination="7ur-om-lrr" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="wLz-FT-noJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hb1-iz-kYr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7ur-om-lrr" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1815" y="860"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gtI-Zc-cqe">
@@ -158,15 +254,39 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ZpM-Q8-JHi" kind="relationship" relationship="rootViewController" id="MBY-U4-jlN"/>
+                        <segue destination="xDy-8I-7EF" kind="relationship" relationship="rootViewController" id="MBY-U4-jlN"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q6P-5B-31e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="876" y="123.68815592203899"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="v53-Bn-eoQ">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="xDy-8I-7EF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="lmb-xv-txx"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="0IL-6y-8te">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ZpM-Q8-JHi" kind="relationship" relationship="viewControllers" id="Ub2-8T-HbS"/>
+                        <segue destination="jdk-tS-50f" kind="relationship" relationship="viewControllers" id="3OE-za-bvm"/>
+                        <segue destination="1nU-P8-OjQ" kind="relationship" relationship="viewControllers" id="lcc-y6-5pY"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="orY-PV-hg5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1815.2" y="123.68815592203899"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="account-icon" width="29" height="29"/>
+        <image name="capture-icon" width="24" height="24"/>
         <image name="glyph-logo_May2016" width="504" height="504"/>
+        <image name="home-icon" width="23" height="22"/>
     </resources>
 </document>
