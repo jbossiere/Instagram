@@ -13,6 +13,8 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    let OKAction = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,10 @@ class LoginViewController: UIViewController {
                 self.usernameField.text = ""
                 self.passwordField.text = ""
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            } else {
+                let alertController = UIAlertController(title: "Error", message: "\(error!.localizedDescription)", preferredStyle: .alert)
+                alertController.addAction(self.OKAction)
+                self.present(alertController, animated: true) {}
             }
         }
     }
@@ -43,6 +49,9 @@ class LoginViewController: UIViewController {
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             } else {
                 print("error: \(error?.localizedDescription)")
+                let alertController = UIAlertController(title: "Error", message: "\(error!.localizedDescription)", preferredStyle: .alert)
+                alertController.addAction(self.OKAction)
+                self.present(alertController, animated: true) {}
             }
         }
         
