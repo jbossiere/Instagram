@@ -24,6 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "http://radiant-badlands-31154.herokuapp.com/parse"
             })
         )
+        
+        if PFUser.current() != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "InstaNavigationController")
+            self.window?.rootViewController = vc
+
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+            self.window?.rootViewController = vc
+        }
         return true
     }
 

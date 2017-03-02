@@ -16,13 +16,16 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        usernameField.autocorrectionType = .no
+        passwordField.autocorrectionType = .no
+        passwordField.isSecureTextEntry = true
     }
+    
     @IBAction func onSignin(_ sender: Any) {
         PFUser.logInWithUsername(inBackground: usernameField.text!, password: passwordField.text!) { (user: PFUser?, error: Error?) in
             if user != nil {
-                print("You're logged in")
+                self.usernameField.text = ""
+                self.passwordField.text = ""
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }
@@ -35,7 +38,8 @@ class LoginViewController: UIViewController {
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {
-                print("Yay, created a user.")
+                self.usernameField.text = ""
+                self.passwordField.text = ""
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             } else {
                 print("error: \(error?.localizedDescription)")
@@ -43,6 +47,8 @@ class LoginViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func unwindToLogin (segue: UIStoryboardSegue) {}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
