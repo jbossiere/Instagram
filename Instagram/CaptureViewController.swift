@@ -13,16 +13,27 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     @IBOutlet weak var choosePhotoButton: UIButton!
     @IBOutlet weak var takePhotoButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var captionTextField: UITextField!
+    @IBOutlet weak var postImageView: UIImageView!
+    
     let vc = UIImagePickerController()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         choosePhotoButton.layer.cornerRadius = 5
         takePhotoButton.layer.cornerRadius = 5
+        shareButton.layer.cornerRadius = 5
+        
+        postImageView.isHidden = true
+        captionTextField.isHidden = true
+        shareButton.isHidden = true
 
         vc.delegate = self
         vc.allowsEditing = true
+        
     }
     
     @IBAction func takePhoto(_ sender: Any) {
@@ -35,13 +46,28 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         vc.sourceType = UIImagePickerControllerSourceType.photoLibrary
         self.present(vc, animated: true, completion: nil)
     }
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-//        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-//
-//        dismiss(animated: true, completion: nil)
-//    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        print(info)
+        choosePhotoButton.isHidden = true
+        takePhotoButton.isHidden = true
+        captionTextField.isHidden = false
+        postImageView.isHidden = false
+        shareButton.isHidden = false
+        postImageView.image = originalImage
 
+        dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func sharePost(_ sender: Any) {
+        let post = Post.postUserImage(image: postImageView.image!, withCaption: captionTextField.text!) { (success: Bool, error: Error?) in
+            
+        }
+        print(post)
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

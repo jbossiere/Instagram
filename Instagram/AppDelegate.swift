@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if PFUser.current() != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "InstaNavigationController")
+            let vc = storyboard.instantiateViewController(withIdentifier: "InstaTabController")
             self.window?.rootViewController = vc
 
         } else {

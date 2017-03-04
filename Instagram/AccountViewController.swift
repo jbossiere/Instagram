@@ -15,6 +15,7 @@ class AccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         logoutButton.layer.cornerRadius = 5
+        
         // Do any additional setup after loading the view.
     }
 
