@@ -48,8 +48,8 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        print(info)
+//        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+//        print(info)
         choosePhotoButton.isHidden = true
         takePhotoButton.isHidden = true
         captionTextField.isHidden = false
@@ -61,11 +61,18 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
 
     @IBAction func sharePost(_ sender: Any) {
-        let post = Post.postUserImage(image: postImageView.image!, withCaption: captionTextField.text!) { (success: Bool, error: Error?) in
-            
+        Post.postUserImage(image: postImageView.image!, withCaption: captionTextField.text!) { (success: Bool, error: Error?) in
+            if success {
+                self.choosePhotoButton.isHidden = false
+                self.takePhotoButton.isHidden = false
+                self.captionTextField.isHidden = true
+                self.postImageView.isHidden = true
+               self.shareButton.isHidden = true
+            } else {
+                print("error: \(error?.localizedDescription)")
+            }
         }
-        print(post)
-        
+
     }
     
     override func didReceiveMemoryWarning() {

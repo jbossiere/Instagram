@@ -33,7 +33,6 @@ class Post: NSObject {
     class func postUserImage(image: UIImage?, withCaption caption: String?, withCompletion completion: PFBooleanResultBlock?) {
         // Create Parse object PFObject
         let post = PFObject(className: "Post")
-        print("Hello world")
         // Add relevant fields to the object
         post["media"] = getPFFileFromImage(image: image) // PFFile column type
         post["author"] = PFUser.current() // Pointer column type that points to PFUser
