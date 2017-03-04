@@ -13,8 +13,9 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     @IBOutlet weak var choosePhotoButton: UIButton!
     @IBOutlet weak var takePhotoButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var captionTextField: UITextField!
+    @IBOutlet weak var textBGView: UIView!
     @IBOutlet weak var postImageView: UIImageView!
     
     let vc = UIImagePickerController()
@@ -23,16 +24,16 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        choosePhotoButton.layer.cornerRadius = 5
-        takePhotoButton.layer.cornerRadius = 5
-        shareButton.layer.cornerRadius = 5
+        self.choosePhotoButton.layer.cornerRadius = 5
+        self.takePhotoButton.layer.cornerRadius = 5
         
-        postImageView.isHidden = true
-        captionTextField.isHidden = true
-        shareButton.isHidden = true
+        self.postImageView.isHidden = true
+        self.captionTextField.isHidden = true
+        self.textBGView.isHidden = true
+        self.shareButton.isEnabled = false
 
-        vc.delegate = self
-        vc.allowsEditing = true
+        self.vc.delegate = self
+        self.vc.allowsEditing = true
         
     }
     
@@ -50,29 +51,44 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
 //        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
 //        print(info)
-        choosePhotoButton.isHidden = true
-        takePhotoButton.isHidden = true
-        captionTextField.isHidden = false
-        postImageView.isHidden = false
-        shareButton.isHidden = false
-        postImageView.image = originalImage
+        self.choosePhotoButton.isHidden = true
+        self.takePhotoButton.isHidden = true
+        self.captionTextField.isHidden = false
+        self.postImageView.isHidden = false
+        self.textBGView.isHidden = false
+        self.shareButton.isEnabled = true
+        self.postImageView.image = originalImage
 
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func sharePost(_ sender: Any) {
-        Post.postUserImage(image: postImageView.image!, withCaption: captionTextField.text!) { (success: Bool, error: Error?) in
+    @IBAction func postPhoto(_ sender: Any) {
+        let imageToPost = resize(image: self.postImageView.image!, newSize: CGSize(width: 600, height: 600))
+        let caption = self.captionTextField.text!
+        Post.postUserImage(image: imageToPost, withCaption: caption) { (success: Bool, error: Error?) in
             if success {
                 self.choosePhotoButton.isHidden = false
                 self.takePhotoButton.isHidden = false
                 self.captionTextField.isHidden = true
                 self.postImageView.isHidden = true
-               self.shareButton.isHidden = true
+                self.textBGView.isHidden = true
+                self.shareButton.isEnabled = false
             } else {
                 print("error: \(error?.localizedDescription)")
             }
         }
-
+    }
+    
+    func resize(image: UIImage, newSize: CGSize) -> UIImage {
+        let resizeImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        resizeImageView.contentMode = UIViewContentMode.scaleAspectFill
+        resizeImageView.image = image
+        
+        UIGraphicsBeginImageContext(resizeImageView.frame.size)
+        resizeImageView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
     }
     
     override func didReceiveMemoryWarning() {

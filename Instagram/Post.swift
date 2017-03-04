@@ -30,6 +30,7 @@ class Post: NSObject {
         self.caption = caption
     }
     
+    
     class func postUserImage(image: UIImage?, withCaption caption: String?, withCompletion completion: PFBooleanResultBlock?) {
         // Create Parse object PFObject
         let post = PFObject(className: "Post")
