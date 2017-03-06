@@ -37,7 +37,6 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         self.vc.delegate = self
         self.vc.allowsEditing = true
-        
     }
     
     @IBAction func takePhoto(_ sender: Any) {
@@ -53,7 +52,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
 //        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-//        print(info)
+
         self.choosePhotoButton.isHidden = true
         self.takePhotoButton.isHidden = true
         self.captionTextField.isHidden = false
@@ -77,6 +76,8 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
             if success {
                 MBProgressHUD.hide(for: self.view, animated: true)
                 self.tabBarController?.selectedIndex = 0
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reload"), object: nil)
+                
                 self.choosePhotoButton.isHidden = false
                 self.takePhotoButton.isHidden = false
                 self.captionTextField.isHidden = true
@@ -99,6 +100,15 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage!
+    }
+    @IBAction func onCancel(_ sender: Any) {
+        self.choosePhotoButton.isHidden = false
+        self.takePhotoButton.isHidden = false
+        self.captionTextField.isHidden = true
+        self.postImageView.isHidden = true
+        self.textBGView.isHidden = true
+        self.shareButton.isEnabled = false
+        self.captionTextField.text = ""
     }
     
     override func didReceiveMemoryWarning() {

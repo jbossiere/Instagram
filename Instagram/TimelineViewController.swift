@@ -17,10 +17,26 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var postImageView: PFImageView!
     @IBOutlet weak var captionLabel: UILabel!
     
+    var posts: [PFObject]?
+    let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 416
+        
+        //LOAD DATA FROM PARSE
+        displayPosts()
+        
+        //PULL TO REFRESH
+//        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(displayPosts), for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+
+        //ADD OBSERVER FOR OTHER VIEW CONTROLLER TO RELOAD DATA
+        NotificationCenter.default.addObserver(self, selector: #selector(displayPosts), name: NSNotification.Name(rawValue: "reload"), object: nil)
     }
     
     /*
@@ -35,22 +51,28 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
-                for post in posts {
-                    
-                }
+                self.posts = posts
+                self.tableView.reloadData()
             } else {
                 print("error: \(error?.localizedDescription)")
             }
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.refreshControl.endRefreshing()
         }
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        if posts != nil {
+            return (posts?.count)!
+        } else {
+            return 0
+        }
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InstaPostCell", for: indexPath) as! InstaPostCell
         cell.selectionStyle = .none
+        cell.post = posts?[indexPath.row]
         
         return cell
     }

@@ -281,6 +281,7 @@
 				TargetAttributes = {
 					2D44BAB91E6377A100810CA8 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 53NGYJBFW3;
 						ProvisioningStyle = Automatic;
 					};
 					2D44BACD1E6377A100810CA8 = {
@@ -644,7 +645,9 @@
 			baseConfigurationReference = B375F839B3FE43EF6EB20F91 /* Pods-Instagram.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 53NGYJBFW3;
 				INFOPLIST_FILE = Instagram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = julianbossiere.Instagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -657,7 +660,9 @@
 			baseConfigurationReference = C23F046FF0CED376AB4992FC /* Pods-Instagram.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 53NGYJBFW3;
 				INFOPLIST_FILE = Instagram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = julianbossiere.Instagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
