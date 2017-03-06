@@ -141,7 +141,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="413"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KXO-wb-SRi" id="hLQ-2r-UMr">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="412"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="413"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caption" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTw-IK-aqe">
@@ -239,6 +239,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7RX-dB-t1d">
                                 <rect key="frame" x="0.0" y="64" width="375" height="80"/>
                                 <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dfS-Et-KYF">
+                                        <rect key="frame" x="8" y="8" width="279" height="64"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LpD-Eb-uwR">
                                         <rect key="frame" x="295" y="0.0" width="80" height="80"/>
                                         <constraints>
@@ -246,25 +251,16 @@
                                             <constraint firstAttribute="width" constant="80" id="p9a-Lh-yFR"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Write a caption" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ef9-nR-b2x">
-                                        <rect key="frame" x="8" y="8" width="119" height="64"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="64" id="k95-Sg-szw"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94173990440612676" green="0.94572947745395797" blue="0.92372630616591789" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="6eM-Ar-nQf"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ef9-nR-b2x" secondAttribute="bottom" constant="8" id="E68-Uz-FIG"/>
-                                    <constraint firstItem="LpD-Eb-uwR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ef9-nR-b2x" secondAttribute="trailing" constant="8" id="JUH-Xt-4WA"/>
+                                    <constraint firstItem="LpD-Eb-uwR" firstAttribute="leading" secondItem="dfS-Et-KYF" secondAttribute="trailing" constant="8" id="FK2-Vx-OWq"/>
                                     <constraint firstItem="LpD-Eb-uwR" firstAttribute="top" secondItem="7RX-dB-t1d" secondAttribute="top" id="Osj-NU-HWG"/>
-                                    <constraint firstItem="Ef9-nR-b2x" firstAttribute="leading" secondItem="7RX-dB-t1d" secondAttribute="leading" constant="8" id="gjR-v9-Xvh"/>
-                                    <constraint firstItem="Ef9-nR-b2x" firstAttribute="top" secondItem="7RX-dB-t1d" secondAttribute="top" constant="8" id="m5I-lN-h24"/>
+                                    <constraint firstItem="dfS-Et-KYF" firstAttribute="leading" secondItem="7RX-dB-t1d" secondAttribute="leading" constant="8" id="ew6-jR-uVU"/>
+                                    <constraint firstAttribute="bottom" secondItem="dfS-Et-KYF" secondAttribute="bottom" constant="8" id="iTv-D0-anG"/>
                                     <constraint firstAttribute="trailing" secondItem="LpD-Eb-uwR" secondAttribute="trailing" id="oJD-t9-lfD"/>
+                                    <constraint firstItem="dfS-Et-KYF" firstAttribute="top" secondItem="7RX-dB-t1d" secondAttribute="top" constant="8" id="tF6-V0-MDB"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -292,7 +288,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="captionTextField" destination="Ef9-nR-b2x" id="dFB-93-CfK"/>
+                        <outlet property="captionTextView" destination="dfS-Et-KYF" id="GZg-eY-Fub"/>
                         <outlet property="choosePhotoButton" destination="vls-eq-7TL" id="E5E-QK-le7"/>
                         <outlet property="postImageView" destination="LpD-Eb-uwR" id="ZBx-0G-ZfW"/>
                         <outlet property="shareButton" destination="me8-3Y-8Rs" id="MzS-Na-dTe"/>

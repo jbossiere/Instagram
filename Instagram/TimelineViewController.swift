@@ -27,6 +27,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 416
         
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         //LOAD DATA FROM PARSE
         displayPosts()
         

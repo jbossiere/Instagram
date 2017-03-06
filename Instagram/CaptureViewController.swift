@@ -12,10 +12,10 @@ import MBProgressHUD
 
 class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var captionTextView: UITextView!
     @IBOutlet weak var choosePhotoButton: UIButton!
     @IBOutlet weak var takePhotoButton: UIButton!
     @IBOutlet weak var shareButton: UIBarButtonItem!
-    @IBOutlet weak var captionTextField: UITextField!
     @IBOutlet weak var textBGView: UIView!
     @IBOutlet weak var postImageView: UIImageView!
     
@@ -25,18 +25,19 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.captionTextField.autocorrectionType = .no
+        self.captionTextView.autocorrectionType = .no
         
         self.choosePhotoButton.layer.cornerRadius = 5
         self.takePhotoButton.layer.cornerRadius = 5
         
         self.postImageView.isHidden = true
-        self.captionTextField.isHidden = true
+        self.captionTextView.isHidden = true
         self.textBGView.isHidden = true
         self.shareButton.isEnabled = false
 
         self.vc.delegate = self
         self.vc.allowsEditing = true
+        
     }
     
     @IBAction func takePhoto(_ sender: Any) {
@@ -55,7 +56,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         self.choosePhotoButton.isHidden = true
         self.takePhotoButton.isHidden = true
-        self.captionTextField.isHidden = false
+        self.captionTextView.isHidden = false
         self.postImageView.isHidden = false
         self.textBGView.isHidden = false
         self.shareButton.isEnabled = true
@@ -70,7 +71,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
      */
     @IBAction func postPhoto(_ sender: Any) {
         let imageToPost = resize(image: self.postImageView.image!, newSize: CGSize(width: 600, height: 600))
-        let caption = self.captionTextField.text!
+        let caption = self.captionTextView.text!
         MBProgressHUD.showAdded(to: self.view, animated: true)
         Post.postUserImage(image: imageToPost, withCaption: caption) { (success: Bool, error: Error?) in
             if success {
@@ -80,7 +81,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
                 
                 self.choosePhotoButton.isHidden = false
                 self.takePhotoButton.isHidden = false
-                self.captionTextField.isHidden = true
+                self.captionTextView.isHidden = true
                 self.postImageView.isHidden = true
                 self.textBGView.isHidden = true
                 self.shareButton.isEnabled = false
@@ -101,14 +102,19 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         UIGraphicsEndImageContext()
         return newImage!
     }
+    
+    /*
+     On cancel, reset the UI and return to home timeline
+     */
     @IBAction func onCancel(_ sender: Any) {
+        self.tabBarController?.selectedIndex = 0
         self.choosePhotoButton.isHidden = false
         self.takePhotoButton.isHidden = false
-        self.captionTextField.isHidden = true
+        self.captionTextView.isHidden = true
         self.postImageView.isHidden = true
         self.textBGView.isHidden = true
         self.shareButton.isEnabled = false
-        self.captionTextField.text = ""
+        self.captionTextView.text = ""
     }
     
     override func didReceiveMemoryWarning() {
