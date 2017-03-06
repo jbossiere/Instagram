@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import MBProgressHUD
 
 class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -23,6 +24,8 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.captionTextField.autocorrectionType = .no
         
         self.choosePhotoButton.layer.cornerRadius = 5
         self.takePhotoButton.layer.cornerRadius = 5
@@ -61,12 +64,19 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         dismiss(animated: true, completion: nil)
     }
-
+    
+    /*
+     - Resizes image and prepares to post photo to Parse
+     - Automatically switches selected index of tab to Home timeline
+     */
     @IBAction func postPhoto(_ sender: Any) {
         let imageToPost = resize(image: self.postImageView.image!, newSize: CGSize(width: 600, height: 600))
         let caption = self.captionTextField.text!
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         Post.postUserImage(image: imageToPost, withCaption: caption) { (success: Bool, error: Error?) in
             if success {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.tabBarController?.selectedIndex = 0
                 self.choosePhotoButton.isHidden = false
                 self.takePhotoButton.isHidden = false
                 self.captionTextField.isHidden = true
