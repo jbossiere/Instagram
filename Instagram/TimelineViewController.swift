@@ -9,13 +9,53 @@
 import UIKit
 import Parse
 import MBProgressHUD
+import ParseUI
 
-class TimelineViewController: UIViewController {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var postImageView: PFImageView!
+    @IBOutlet weak var captionLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
     }
+    
+    /*
+     - Construct PFQuery
+     - fetch data asynchronously
+     */
+    func displayPosts() {
+        let query = PFQuery(className: "Post")
+        query.order(byDescending: "createdAt")
+        query.includeKey("author")
+        query.limit = 20
+        
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts {
+                for post in posts {
+                    
+                }
+            } else {
+                print("error: \(error?.localizedDescription)")
+            }
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "InstaPostCell", for: indexPath) as! InstaPostCell
+        cell.selectionStyle = .none
+        
+        return cell
+    }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
